@@ -6,50 +6,125 @@
     <title>Главная - Meow</title>
     <meta name="description" content="Краткое описание главной страницы вашего сайта">
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Шапка сайта -->
-    <header>
-        <a href="/">Логотип или название сайта</a>
+    <header class="site-header">
+        <a href="/" class="site-header__logo">Логотип или название сайта</a>
         <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a href="index.html" class="site-nav__link site-nav__link--active">Главная</a></li>
+                <li class="site-nav__item"><a href="about.html" class="site-nav__link">О нас</a></li>
+                <li class="site-nav__item"><a href="contacts.html" class="site-nav__link">Контакты</a></li>
+                <li class="site-nav__item"><button id="openDialog" type="button" class="site-nav__btn">Написать нам</button></li>
             </ul>
         </nav>
     </header>
 
     <!-- Уникальное основное содержимое страницы -->
     <main>
-        <h1>Добро пожаловать на наш сайт!</h1>
+        <!-- Герой-секция с фоновым изображением -->
+        <section class="hero-section">
+            <div class="container">
+                <h1 class="hero-section__title">Добро пожаловать на наш сайт!</h1>
+                <p class="hero-section__text">Описание предоставляемых услуг...</p>
+                <a href="#services" class="hero-section__cta">Узнать больше</a>
+            </div>
+        </section>
 
         <!-- Секция 1 с якорем -->
-        <section id="services">
-            <h2>Наши услуги</h2>
-            <p>Описание предоставляемых услуг...</p>
-            <a href="#contacts">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section__title">Наши услуги</h2>
+                <p class="section__text">Описание предоставляемых услуг...</p>
+                <!-- Responsive изображение -->
+                <div class="section__media">
+                    <img src="https://cataas.com/cat?width=600&height=400" width="600" height="400" alt="Наши услуги" loading="lazy">
+                </div>
+                <a href="#contacts" class="section__link">Связаться с нами</a> <!-- Якорная ссылка внутри страницы -->
+            </div>
         </section>
 
         <!-- Секция 2 с якорем -->
-        <section id="portfolio">
-            <h2>Портфолио</h2>
-            <p>Примеры наших работ...</p>
+        <section id="portfolio" class="section section--alt">
+            <div class="container">
+                <h2 class="section__title">Портфолио</h2>
+                <p class="section__text">Примеры наших работ...</p>
+                <!-- Локальное видео -->
+                <div class="section__media">
+                    <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ3pvYWxwc3VhYm52bTlmcTFsY3M5eXd2Y3lzaGU1OHpmMWp3OG1vcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif" width="600" height="400" alt="Наши работы" loading="lazy">
+                </div>
+            </div>
         </section>
 
         <!-- Секция 3 с якорем -->
-        <section id="contacts">
-            <h2>Контактная информация</h2>
-            <p>Наши контакты...</p>
-            <a href="contacts.html">Подробнее</a> <!-- Ссылка на отдельную страницу -->
+        <section id="contacts" class="section">
+            <div class="container">
+                <h2 class="section__title">Контактная информация</h2>
+                <p class="section__text">Наши контакты...</p>
+                <a href="contacts.html" class="section__link">Подробнее</a> <!-- Ссылка на отдельную страницу -->
+            </div>
         </section>
     </main>
 
+    <!-- Модальное окно с формой -->
+    <dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
+        <div class="modal__content">
+            <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+            <form id="contactForm" class="form" method="dialog" novalidate>
+                <div class="form__group">
+                    <label for="name" class="form__label">Имя</label>
+                    <input id="name" name="name" type="text" class="form__input" required minlength="2" autocomplete="given-name">
+                </div>
+
+                <div class="form__group">
+                    <label for="email" class="form__label">E-mail</label>
+                    <input id="email" name="email" type="email" class="form__input" required autocomplete="email">
+                </div>
+
+                <div class="form__group">
+                    <label for="phone" class="form__label">Телефон</label>
+                    <input id="phone" name="phone" type="tel" class="form__input" inputmode="tel" autocomplete="tel" aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+                    <small id="phoneHelp" class="form__help">Формат: +7 (900) 000-00-00</small>
+                </div>
+
+                <div class="form__group">
+                    <label for="date" class="form__label">Дата</label>
+                    <input id="date" name="date" type="date" class="form__input">
+                </div>
+
+                <div class="form__group">
+                    <label for="topic" class="form__label">Тема</label>
+                    <select id="topic" name="topic" class="form__select" required>
+                        <option value="">Выберите тему</option>
+                        <option>Вопрос</option>
+                        <option>Заказ</option>
+                    </select>
+                </div>
+
+                <div class="form__group">
+                    <label for="message" class="form__label">Сообщение</label>
+                    <textarea id="message" name="message" class="form__textarea" rows="4" required></textarea>
+                </div>
+
+                <div class="form__actions">
+                    <button id="closeDialog" type="button" class="btn btn--secondary">Закрыть</button>
+                    <button type="submit" class="btn">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
     <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; 2023 Meow. Все права защищены.</p>
-        <p>Телефон: +9 (999) 999-99-99</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2023 Meow. Все права защищены.</p>
+            <p>Телефон: +9 (999) 999-99-99</p>
+        </div>
     </footer>
+
+    <script src="main.js"></script>
 </body>
 </html>
